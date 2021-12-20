@@ -65,7 +65,8 @@ func TestFeatureToggles(t *testing.T) {
 
 		toggles, _ := f.NewSection("feature_toggles")
 		for k, v := range tc.conf {
-			toggles.NewKey(k, v)
+			_, err := toggles.NewKey(k, v)
+			require.ErrorIs(t, err, nil)
 		}
 
 		err := cfg.readFeatureToggles(f)
